@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My Portfolio</title>
+    <meta
+      name="description"
+      content="A clean, responsive HTML + CSS only portfolio template." />
+    <style>
+      :root {
+        --bg: #0b0c10;
+        --panel: #12141a;
+        --text: #e6e6e6;
+        --muted: #a7b0be;
+        --brand: #5cc8ff;
+        --brand-2: #8b5cff;
+        --ok: #9ae6b4;
+        --radius: 1rem;
+        --maxw: 1100px;
+      }
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #f8fafc;
+          --panel: #ffffff;
+          --text: #0f172a;
+          --muted: #475569;
+        }
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+          Cantarell, Noto Sans, sans-serif;
+        background: linear-gradient(180deg, var(--bg), #0f1220 70%);
+        color: var(--text);
+      }
+      a {
+        color: inherit;
+      }
+
+      .container {
+        max-width: var(--maxw);
+        margin-inline: auto;
+        padding: clamp(16px, 3vw, 32px);
+      }
+
+      /* Header */
+      .header {
+        position: sticky;
+        top: 0;
+        backdrop-filter: saturate(180%) blur(8px);
+        background: color-mix(in srgb, var(--panel) 85%, transparent);
+        border-bottom: 1px solid
+          color-mix(in srgb, var(--text) 10%, transparent);
+        z-index: 50;
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+      }
+      .brand-mark {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: conic-gradient(from 0deg, var(--brand), var(--brand-2));
+        box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 25%, transparent);
+      }
+      .nav a {
+        opacity: 0.9;
+        text-decoration: none;
+        border-radius: 0.6rem;
+        padding: 0.5rem 0.8rem;
+      }
+      .nav a:hover,
+      .nav a:focus-visible {
+        background: color-mix(in srgb, var(--text) 8%, transparent);
+      }
+      .links {
+        display: flex;
+        gap: 0.25rem;
+        flex-wrap: wrap;
+      }
+
+      /* Hero */
+      .hero {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: clamp(16px, 3vw, 32px);
+        align-items: center;
+      }
+      .hero .intro h1 {
+        font-size: clamp(28px, 4vw, 48px);
+        line-height: 1.15;
+        margin: 0.2rem 0 0.6rem;
+      }
+      .hero .intro p {
+        color: var(--muted);
+        max-width: 60ch;
+      }
+      .cta {
+        display: flex;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.7rem 1rem;
+        border-radius: 0.8rem;
+        border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .btn.primary {
+        background: linear-gradient(135deg, var(--brand), var(--brand-2));
+        color: #0b0c10;
+        border-color: transparent;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+      .btn:active {
+        transform: translateY(0);
+      }
+
+      .avatar-wrap {
+        display: grid;
+        place-items: center;
+      }
+      .avatar {
+        --size: 190px;
+        width: var(--size);
+        aspect-ratio: 1;
+        border-radius: 50%;
+        overflow: hidden;
+        background: linear-gradient(
+          135deg,
+          color-mix(in srgb, var(--brand) 40%, transparent),
+          color-mix(in srgb, var(--brand-2) 40%, transparent)
+        );
+        padding: 6px;
+        box-shadow: 0 10px 30px
+          color-mix(in srgb, var(--brand) 20%, transparent);
+      }
+      .avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+
+      /* Section */
+      section {
+        margin-top: clamp(24px, 4vw, 54px);
+      }
+      .section-title {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-bottom: 1rem;
+      }
+      .section-title h2 {
+        font-size: clamp(20px, 2.6vw, 30px);
+        margin: 0;
+      }
+      .section-title .rule {
+        flex: 1;
+        height: 1px;
+        background: color-mix(in srgb, var(--text) 12%, transparent);
+      }
+
+      /* About */
+      .about {
+        background: color-mix(in srgb, var(--panel) 92%, transparent);
+        border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+        padding: clamp(14px, 2.4vw, 24px);
+        border-radius: var(--radius);
+      }
+
+      /* Projects */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: clamp(12px, 2vw, 18px);
+      }
+      .card {
+        background: var(--panel);
+        border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+        border-radius: var(--radius);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .card img {
+        width: 100%;
+        aspect-ratio: 16/9;
+        object-fit: cover;
+      }
+      .card .content {
+        padding: 1rem;
+      }
+      .card h3 {
+        margin: 0.2rem 0 0.4rem;
+        font-size: 1.1rem;
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin: 0.6rem 0;
+      }
+      .tag {
+        font-size: 0.78rem;
+        padding: 0.2rem 0.5rem;
+        border-radius: 0.6rem;
+        background: color-mix(in srgb, var(--brand) 12%, transparent);
+        border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+      }
+      .card .actions {
+        margin-top: auto;
+        padding: 1rem;
+        display: flex;
+        gap: 0.5rem;
+      }
+      .card .actions a {
+        flex: 1;
+        text-align: center;
+      }
+
+      /* Gallery */
+      .gallery {
+        columns: 3 260px;
+        column-gap: 12px;
+      }
+      .gallery figure {
+        break-inside: avoid;
+        margin: 0 0 12px;
+        border-radius: var(--radius);
+        overflow: hidden;
+        border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+        background: var(--panel);
+      }
+      .gallery img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .gallery figcaption {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      /* Footer */
+      footer {
+        margin-top: 56px;
+        padding: 24px 0;
+        color: var(--muted);
+        border-top: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+      }
+
+      /* Utilities */
+      .muted {
+        color: var(--muted);
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      /* Responsive */
+      @media (max-width: 900px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+        .avatar-wrap {
+          order: -1;
+        }
+      }
+      @media (max-width: 720px) {
+        .grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 520px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#main" class="sr-only">Skip to content</a>
+
+    <header class="header">
+      <div class="container nav" role="navigation" aria-label="Primary">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true"></span> My Portfolio
+        </div>
+        <nav class="links">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#gallery">Pictures</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="container" tabindex="-1">
+      <section class="hero" aria-label="Introduction">
+        <div class="intro">
+          <p class="muted">Hello! I'm</p>
+          <h1>Alden Derf</h1>
+          <p>
+            System Administration & Web Development educator based in the
+            Philippines. I build clean, accessible UIs and teach practical
+            DevOps and maintenance fundamentals.
+          </p>
+          <div class="cta">
+            <!-- The button below has a title attribute and uses the HTML download attribute. Replace resume.pdf with your own file name. -->
+            <a
+              class="btn primary"
+              href="resume.pdf"
+              title="Download Résumé"
+              download>
+              <span aria-hidden="true">⬇️</span> Download Résumé
+            </a>
+            <a class="btn" href="#projects">View Projects</a>
+            <a class="btn" href="mailto:your.email@example.com" title="Email me"
+              >Contact</a
+            >
+          </div>
+        </div>
+        <div class="avatar-wrap">
+          <div class="avatar" aria-label="Profile photo">
+            <img
+              src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=800&auto=format&fit=crop"
+              alt="Portrait placeholder" />
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="section-title">
+          <h2>About</h2>
+          <div class="rule"></div>
+        </div>
+        <div class="about">
+          <p>
+            I'm a hands-on educator with a passion for clean code, reliable
+            systems, and simple user experiences. I enjoy turning complex
+            requirements into practical, maintainable solutions. When I'm not
+            teaching, I tinker with Linux servers, explore Next.js, and
+            contribute to student projects.
+          </p>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="section-title">
+          <h2>Sample Projects</h2>
+          <div class="rule"></div>
+        </div>
+        <div class="grid">
+          <!-- Project 1 -->
+          <article class="card">
+            <img
+              src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1280&auto=format&fit=crop"
+              alt="Dashboard UI preview" />
+            <div class="content">
+              <h3>Admin Dashboard UI</h3>
+              <p class="muted">
+                A responsive, accessible dashboard layout with cards, charts,
+                and a flexible grid.
+              </p>
+              <div class="tags">
+                <span class="tag">HTML</span><span class="tag">CSS Grid</span
+                ><span class="tag">A11y</span>
+              </div>
+            </div>
+            <div class="actions">
+              <a class="btn" href="#" title="Open live demo">Live Demo</a>
+              <a class="btn" href="#" title="View the source code">Source</a>
+            </div>
+          </article>
+          <!-- Project 2 -->
+          <article class="card">
+            <img
+              src="https://images.unsplash.com/photo-1552590635-27c2c2128d77?q=80&w=1280&auto=format&fit=crop"
+              alt="Landing page preview" />
+            <div class="content">
+              <h3>Product Landing Page</h3>
+              <p class="muted">
+                Clean hero, features, and pricing sections built with pure HTML
+                + CSS—no JS.
+              </p>
+              <div class="tags">
+                <span class="tag">Flexbox</span
+                ><span class="tag">Responsive</span>
+              </div>
+            </div>
+            <div class="actions">
+              <a class="btn" href="#">Live Demo</a>
+              <a class="btn" href="#">Source</a>
+            </div>
+          </article>
+          <!-- Project 3 -->
+          <article class="card">
+            <img
+              src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?q=80&w=1280&auto=format&fit=crop"
+              alt="Portfolio grid preview" />
+            <div class="content">
+              <h3>Portfolio Grid</h3>
+              <p class="muted">
+                An elegant gallery with CSS columns for a masonry-like effect
+                and captions.
+              </p>
+              <div class="tags">
+                <span class="tag">CSS Columns</span
+                ><span class="tag">Performance</span>
+              </div>
+            </div>
+            <div class="actions">
+              <a class="btn" href="#">Live Demo</a>
+              <a class="btn" href="#">Source</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="gallery">
+        <div class="section-title">
+          <h2>Pictures</h2>
+          <div class="rule"></div>
+        </div>
+        <div class="gallery" aria-label="Photo gallery">
+          <figure>
+            <img
+              src="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?q=80&w=1200&auto=format&fit=crop"
+              alt="Workstation with laptop and coffee" />
+            <figcaption>Workspace vibes</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="https://images.unsplash.com/photo-1487017159836-4e23ece2e4cf?q=80&w=1200&auto=format&fit=crop"
+              alt="Code on screen closeup" />
+            <figcaption>Writing clean code</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop"
+              alt="Server racks" />
+            <figcaption>Server maintenance</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format&fit=crop"
+              alt="Team collaborating" />
+            <figcaption>Teaching & teamwork</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="section-title">
+          <h2>Contact</h2>
+          <div class="rule"></div>
+        </div>
+        <div class="about">
+          <p>
+            Email:
+            <a href="mailto:your.email@example.com">your.email@example.com</a> ·
+            GitHub: <a href="#">github.com/yourname</a> · LinkedIn:
+            <a href="#">linkedin.com/in/yourname</a>
+          </p>
+        </div>
+      </section>
+
+      <footer>
+        <p class="container">
+          © <span id="y"></span> Your Name. All rights reserved.
+        </p>
+      </footer>
+    </main>
+
+    <!-- Tiny inline script only to render the current year in the footer. If you truly want ZERO JS, replace with a fixed year. -->
+    <script>
+      document.getElementById("y").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
